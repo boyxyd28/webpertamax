@@ -88,22 +88,37 @@ button {
 
 <script>
 
-// 🔥 GENERATE OTP RANDOM
-let otp = Math.floor(100000 + Math.random() * 900000).toString();
-alert("Kode OTP: " + otp); // simulasi WA
+// 🔥 AMBIL DATA USER
+let nik = localStorage.getItem("nik") || "";
+let nomor = "+62 8**" + nik.slice(-3);
 
-// 🔥 AUTO PINDAH INPUT
+// tampilkan nomor
+document.querySelector("p").innerText = "Kode dikirim ke " + nomor;
+
+// 🔥 GENERATE OTP
+let otp = Math.floor(100000 + Math.random() * 900000).toString();
+alert("Kode OTP: " + otp);
+
+// 🔥 INPUT
 let inputs = document.querySelectorAll(".otp-input input");
 
 inputs.forEach((input, index) => {
   input.addEventListener("input", () => {
+
+    // auto pindah
     if(input.value && index < 5){
       inputs[index + 1].focus();
     }
+
+    // 🔥 AUTO SUBMIT kalau sudah 6 digit
+    if(getOTP().length === 6){
+      verifikasi();
+    }
+
   });
 });
 
-// 🔥 AMBIL OTP DARI INPUT
+// 🔥 AMBIL OTP
 function getOTP(){
   let code = "";
   inputs.forEach(i => code += i.value);
@@ -112,12 +127,23 @@ function getOTP(){
 
 // 🔥 VERIFIKASI
 function verifikasi(){
+
   if(getOTP() !== otp){
     alert("Kode salah!");
     return;
   }
 
-  window.location.href = "home.html";
+  // 🔥 LOADING FEEL
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
+      <div>Memverifikasi...</div>
+    </div>
+  `;
+
+  setTimeout(()=>{
+    localStorage.setItem("isLogin", "true");
+    window.location.href = "home.html";
+  },1500);
 }
 
 // 🔥 TIMER
@@ -142,6 +168,3 @@ function resend(){
 }
 
 </script>
-
-</body>
-</html>
