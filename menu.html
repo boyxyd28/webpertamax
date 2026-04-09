@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jago Dana Cepat</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+/* HEADER */
+.header {
+  padding: 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* CONTAINER */
+.container {
+  background: #f9fafb;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 20px;
+  min-height: 90vh;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* PILIHAN */
+.choice {
+  display: flex;
+  background: #eee;
+  border-radius: 999px;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.choice div {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.active {
+  background: linear-gradient(to right, #f59e0b, #f97316);
+  color: white;
+  border-radius: 999px;
+}
+
+/* LOGO */
+.logo img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sub {
+  font-size: 13px;
+  color: #666;
+}
+
+/* NOMINAL */
+.amount {
+  font-size: 28px;
+  color: #f59e0b;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* SLIDER */
+input[type=range] {
+  width: 100%;
+}
+
+/* ESTIMASI */
+.estimasi {
+  font-size: 14px;
+  margin-top: 8px;
+  color: #444;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f59e0b, #f97316);
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* FITUR */
+.feature-box {
+  margin-top: 15px;
+}
+
+.feature {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.icon {
+  font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  JAGO DANA CEPAT
+</div>
+
+<div class="container">
+
+  <div class="card">
+<div style="text-align:center; margin-bottom:10px;">
+  <img src="logo-jago.jpg" style="width:50px;">
+  <div style="font-weight:bold; font-size:14px;">Bank Jago</div>
+</div>
+    <div style="font-size:14px; margin-bottom:10px;">
+      Tersedia 2 Pilihan
+    </div>
+
+    <div class="choice">
+      <div class="active">Jago</div>
+      <div>Syariah</div>
+    </div>
+
+    <div class="logo">
+      <!-- GANTI kalau mau logo asli -->
+      <img src="jago.png" onerror="this.style.display='none'">
+    </div>
+
+    <div class="title">Pinjaman fleksibel</div>
+    <div class="sub">Cair instan dalam hitungan menit</div>
+
+    <div class="amount" id="nominal">Rp 10.000.000</div>
+
+    <input type="range" min="1000000" max="20000000" step="500000" value="10000000" id="slider">
+
+    <div class="estimasi" id="estimasi">
+      Estimasi: Rp 900.000 / bulan
+    </div>
+
+    <button onclick="goLogin()">Ajukan Sekarang</button>
+
+  </div>
+
+  <div class="feature-box">
+    <div class="feature">
+      <div class="icon">⚡</div>
+      Cair instan
+    </div>
+
+    <div class="feature">
+      <div class="icon">💼</div>
+      Tanpa biaya admin
+    </div>
+
+    <div class="feature">
+      <div class="icon">📅</div>
+      Tenor fleksibel
+    </div>
+  </div>
+
+</div>
+
+<script>
+let slider = document.getElementById("slider");
+let nominal = document.getElementById("nominal");
+let estimasi = document.getElementById("estimasi");
+
+slider.addEventListener("input", function() {
+  let val = parseInt(this.value);
+
+  nominal.innerText = "Rp " + val.toLocaleString("id-ID");
+
+  let cicilan = Math.floor(val / 12);
+  estimasi.innerText = "Estimasi: Rp " + cicilan.toLocaleString("id-ID") + " / bulan";
+});
+
+function goLogin(){
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
