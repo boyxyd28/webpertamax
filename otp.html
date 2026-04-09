@@ -88,7 +88,9 @@ button {
 
 <script>
 
-// 🔥 AMBIL DATA USER
+<script>
+
+// 🔥 AMBIL NIK
 let nik = localStorage.getItem("nik") || "";
 let nomor = "+62 8**" + nik.slice(-3);
 
@@ -97,25 +99,32 @@ document.querySelector("p").innerText = "Kode dikirim ke " + nomor;
 
 // 🔥 GENERATE OTP
 let otp = Math.floor(100000 + Math.random() * 900000).toString();
-alert("Kode OTP: " + otp);
+console.log("OTP:", otp); // 👉 tampil di console (lebih aman dari alert)
 
 // 🔥 INPUT
 let inputs = document.querySelectorAll(".otp-input input");
 
 inputs.forEach((input, index) => {
+
   input.addEventListener("input", () => {
+
+    // hanya angka
+    input.value = input.value.replace(/[^0-9]/g, "");
 
     // auto pindah
     if(input.value && index < 5){
       inputs[index + 1].focus();
     }
 
-    // 🔥 AUTO SUBMIT kalau sudah 6 digit
-    if(getOTP().length === 6){
-      verifikasi();
-    }
-
   });
+
+  // 🔥 backspace balik
+  input.addEventListener("keydown", (e) => {
+    if(e.key === "Backspace" && !input.value && index > 0){
+      inputs[index - 1].focus();
+    }
+  });
+
 });
 
 // 🔥 AMBIL OTP
@@ -128,12 +137,19 @@ function getOTP(){
 // 🔥 VERIFIKASI
 function verifikasi(){
 
- // 🔥 BYPASS OTP (biar langsung lolos)
-if(getOTP().length < 6){
-  alert("Masukkan 6 digit");
-  return;
-}
-  // 🔥 LOADING FEEL
+  let kode = getOTP();
+
+  if(kode.length < 6){
+    alert("Masukkan 6 digit OTP");
+    return;
+  }
+
+  if(kode !== otp){
+    alert("Kode OTP salah!");
+    return;
+  }
+
+  // loading feel
   document.body.innerHTML = `
     <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
       <div>Memverifikasi...</div>
@@ -141,8 +157,7 @@ if(getOTP().length < 6){
   `;
 
   setTimeout(()=>{
-    localStorage.setItem("isLogin", "true");
-   window.location.href = "home.html";
+    window.location.href = "home.html";
   },1500);
 }
 
@@ -163,7 +178,7 @@ let countdown = setInterval(() => {
 // 🔥 RESEND
 function resend(){
   otp = Math.floor(100000 + Math.random() * 900000).toString();
-  alert("Kode baru: " + otp);
+  console.log("OTP baru:", otp);
   time = 60;
 }
 
