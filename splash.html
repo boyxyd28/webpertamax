@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loading...</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  font-family: Arial;
+}
+
+/* CONTAINER */
+.splash {
+  text-align: center;
+  color: white;
+}
+
+/* LOGO */
+.logo {
+  width: 90px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* TEXT */
+.title {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* LOADING DOT */
+.loading {
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ANIMASI */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="splash">
+  <img src="logo-jago.jpg" class="logo">
+  <div class="title">JAGO DANA CEPAT</div>
+  <div class="loading">Memuat...</div>
+</div>
+
+<script>
+// auto pindah setelah 2 detik
+setTimeout(function(){
+  window.location.href = "index.html";
+}, 2000);
+</script>
+
+</body>
+</html>
