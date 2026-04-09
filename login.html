@@ -65,7 +65,7 @@ button {
 
     <input type="text" id="email" placeholder="Email / No HP">
     <input type="password" id="password" placeholder="Password">
-
+<input type="text" id="nik" placeholder="NIK KTP (16 digit)">
     <small style="font-size:12px; color:#888;">
       Gunakan kombinasi huruf besar, angka & simbol
     </small>
@@ -80,18 +80,31 @@ document.getElementById("btnLogin").addEventListener("click", function() {
 
   let email = document.getElementById("email").value;
   let pass = document.getElementById("password").value;
+  let nik = document.getElementById("nik").value;
 
+  // VALIDASI EMAIL / HP
   if(email.length < 5){
     alert("Masukkan Email / No HP yang valid");
     return;
   }
 
+  // VALIDASI PASSWORD
   let regex = /^(?=.[A-Z])(?=.[0-9])(?=.*[\W_]).{8,}$/;
 
   if(!regex.test(pass)){
     alert("Password harus kuat!\nContoh: King&2828");
     return;
   }
+
+  // VALIDASI NIK (16 digit angka)
+  if(!/^[0-9]{16}$/.test(nik)){
+    alert("NIK harus 16 digit angka!");
+    return;
+  }
+
+  // SIMPAN DATA (BIAR KEPAKE DI HOME)
+  localStorage.setItem("nik", nik);
+  localStorage.setItem("userLogin", email);
 
   let btn = this;
   btn.innerText = "Memproses...";
@@ -103,6 +116,3 @@ document.getElementById("btnLogin").addEventListener("click", function() {
 
 });
 </script>
-
-</body>
-</html>
