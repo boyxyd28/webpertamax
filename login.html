@@ -14,118 +14,142 @@
     --muted:#888;
   }
 
-  *{ box-sizing:border-box; }
-
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom right, var(--orange1), var(--orange2));
+  *{
+    box-sizing:border-box;
   }
 
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(to bottom right, var(--orange1), var(--orange2));
   }
 
-  .card {
-    width: 100%;
-    max-width: 360px;
-    background: #fff;
-    border-radius: 22px;
-    padding: 22px 20px;
-    text-align: center;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  .container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
   }
 
-  .logo {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 10px;
+  .card{
+    width:100%;
+    max-width:360px;
+    background:#fff;
+    border-radius:22px;
+    padding:22px 20px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,0.15);
   }
 
-  h2 {
-    color: var(--text);
-    margin: 10px 0 18px;
-    font-size: 28px;
+  .logo{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 10px;
   }
 
-  .field {
-    width: 100%;
-    margin: 10px 0;
+  h2{
+    color:var(--text);
+    margin:10px 0 18px;
+    font-size:28px;
   }
 
-  .field input {
-    width: 100%;
-    padding: 13px 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    outline: none;
-    font-size: 15px;
-    background: #fff;
-    transition: 0.2s;
+  .field{
+    width:100%;
+    margin:10px 0;
   }
 
-  .field input:focus {
-    border-color: var(--orange2);
-    box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.12);
+  .field input{
+    width:100%;
+    padding:13px 14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    outline:none;
+    font-size:15px;
+    background:#fff;
+    transition:0.2s;
   }
 
-  .password-box {
-    position: relative;
-    width: 100%;
+  .field input:focus{
+    border-color:var(--orange2);
+    box-shadow:0 0 0 3px rgba(245,124,0,0.12);
   }
 
-  .password-box input {
-    padding-right: 48px;
+  .password-box{
+    position:relative;
+    width:100%;
   }
 
-  .eye {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    user-select: none;
+  .password-box input{
+    padding-right:48px;
   }
 
-  .hint {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.4;
+  .eye{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:18px;
+    user-select:none;
+    line-height:1;
   }
 
-  button {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 999px;
-    background: linear-gradient(to right, var(--orange1), var(--orange2));
-    color: #fff;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 16px;
-    cursor: pointer;
-    transition: 0.15s;
+  .hint{
+    display:block;
+    margin-top:4px;
+    font-size:12px;
+    color:var(--muted);
+    text-align:left;
   }
 
-  button:active {
-    transform: scale(0.98);
-    opacity: 0.92;
+  .error{
+    display:block;
+    margin-top:4px;
+    font-size:12px;
+    color:#d11;
+    text-align:left;
+    min-height:16px;
   }
 
-  .loading {
-    display: none;
-    margin-top: 12px;
-    font-size: 13px;
-    color: #666;
+  button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:999px;
+    background:linear-gradient(to right, var(--orange1), var(--orange2));
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    margin-top:16px;
+    cursor:pointer;
+    transition:0.15s;
+  }
+
+  button:active{
+    transform:scale(0.98);
+    opacity:0.92;
+  }
+
+  .loading{
+    display:none;
+    margin-top:12px;
+    font-size:13px;
+    color:#666;
+  }
+
+  .shake{
+    animation:shake 0.3s;
+  }
+
+  @keyframes shake{
+    0% { transform:translateX(0); }
+    25% { transform:translateX(-5px); }
+    50% { transform:translateX(5px); }
+    75% { transform:translateX(-5px); }
+    100% { transform:translateX(0); }
   }
 </style>
 </head>
@@ -133,44 +157,31 @@
 <body>
   <div class="container">
     <div class="card">
-      <img src="logo-jago.jpg" alt="Logo" class="logo" onerror="this.style.display='none'">
+      <img src="logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
       <h2>Masuk ke Akun</h2>
 
-     <div class="field">
-  <input type="text" id="email" placeholder="Email / No HP">
-  <small class="error" id="errEmail"></small>
-</div>
+      <div class="field">
+        <input type="text" id="email" placeholder="Email / No HP" autocomplete="username">
+        <small class="error" id="errEmail"></small>
+      </div>
 
-<div class="field password-box">
-  <input type="password" id="password" placeholder="Password">
-  <span class="eye" onclick="togglePass()" id="eye">👁️</span>
-  <small class="error" id="errPass"></small>
-</div>
+      <div class="field password-box">
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+        <span class="eye" id="eye" onclick="togglePass()">👁️</span>
+        <small class="error" id="errPass"></small>
+      </div>
 
-<div class="field">
-  <input type="text" id="nik" placeholder="NIK KTP (16 digit)">
-  <small class="error" id="errNik"></small>
-</div>
+      <div class="field">
+        <input type="text" id="nik" placeholder="NIK KTP (16 digit)" inputmode="numeric" maxlength="16" autocomplete="off">
+        <small class="hint">Pastikan NIK sesuai KTP</small>
+        <small class="error" id="errNik"></small>
+      </div>
+
+      <button id="btnLogin" type="button">Masuk</button>
+      <div class="loading" id="loading">Memproses...</div>
+    </div>
   </div>
-.error {
-  display: block;
-  text-align: left;
-  font-size: 12px;
-  color: red;
-  margin-top: 4px;
-}
 
-.shake {
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
   <script>
     function togglePass() {
       const input = document.getElementById("password");
@@ -198,66 +209,56 @@
       return regex.test(value);
     }
 
-    document.getElementById("btnLogin").addEventListener("click", function() {
+    function setError(id, text, fieldEl) {
+      document.getElementById(id).innerText = text;
+      fieldEl.classList.add("shake");
+      setTimeout(() => fieldEl.classList.remove("shake"), 300);
+    }
 
-  let email = document.getElementById("email");
-  let pass = document.getElementById("password");
-  let nik = document.getElementById("nik");
+    document.getElementById("btnLogin").addEventListener("click", function () {
+      const emailEl = document.getElementById("email");
+      const passEl = document.getElementById("password");
+      const nikEl = document.getElementById("nik");
 
-  let errEmail = document.getElementById("errEmail");
-  let errPass = document.getElementById("errPass");
-  let errNik = document.getElementById("errNik");
+      const errEmail = document.getElementById("errEmail");
+      const errPass = document.getElementById("errPass");
+      const errNik = document.getElementById("errNik");
+      const loading = document.getElementById("loading");
 
-  // reset error
-  errEmail.innerText = "";
-  errPass.innerText = "";
-  errNik.innerText = "";
+      errEmail.innerText = "";
+      errPass.innerText = "";
+      errNik.innerText = "";
 
-  let valid = true;
+      let valid = true;
 
-  // EMAIL
-  if(email.value.length < 5){
-    errEmail.innerText = "Email / No HP tidak valid";
-    email.classList.add("shake");
-    valid = false;
-  }
+      if (!isValidEmailOrPhone(emailEl.value)) {
+        setError("errEmail", "Email / No HP tidak valid", emailEl);
+        valid = false;
+      }
 
-  // PASSWORD (simple biar gak ribet)
-  if(pass.value.length < 6){
-    errPass.innerText = "Password minimal 6 karakter";
-    pass.classList.add("shake");
-    valid = false;
-  }
+      if (!isStrongPassword(passEl.value)) {
+        setError("errPass", "Password harus kuat. Contoh: King&2828", passEl);
+        valid = false;
+      }
 
-  // NIK
-  if(!/^[0-9]{16}$/.test(nik.value)){
-    errNik.innerText = "NIK harus 16 digit angka";
-    nik.classList.add("shake");
-    valid = false;
-  }
+      if (!/^[0-9]{16}$/.test(nikEl.value)) {
+        setError("errNik", "NIK harus 16 digit angka", nikEl);
+        valid = false;
+      }
 
-  // hapus animasi setelah jalan
-  setTimeout(() => {
-    email.classList.remove("shake");
-    pass.classList.remove("shake");
-    nik.classList.remove("shake");
-  }, 300);
+      if (!valid) return;
 
-  if(!valid) return;
+      localStorage.setItem("userLogin", emailEl.value.trim());
+      localStorage.setItem("nik", nikEl.value.trim());
 
-  // SIMPAN DATA
-  localStorage.setItem("userLogin", email.value);
-  localStorage.setItem("nik", nik.value);
+      this.disabled = true;
+      this.innerText = "Memproses...";
+      loading.style.display = "block";
 
-  let btn = this;
-  btn.innerText = "Memproses...";
-  btn.style.opacity = "0.7";
-
-  setTimeout(function(){
-    window.location.href = "otp.html";
-  }, 1200);
-
-});
+      setTimeout(function () {
+        window.location.href = "otp.html";
+      }, 1200);
+    });
   </script>
 </body>
 </html>
