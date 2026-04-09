@@ -190,9 +190,12 @@
       this.textContent = "Memproses...";
       this.disabled = true;
 
-      setTimeout(() => {
-        window.location.href = "next.html";
-      }, 1000);
+     // simpan data dulu
+localStorage.setItem("nik", nik);
+
+setTimeout(() => {
+  window.location.href = "otp.html";
+}, 1000);
     });
   </script>
 </body>
