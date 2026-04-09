@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #f9a825, #f57c00);
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 90%;
+  max-width: 350px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+h2 {
+  color: #f97316;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+button {
+  width: 95%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f59e0b, #f97316);
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <img src="logo-jago.jpg" style="width:60px; margin-bottom:10px;">
+
+    <h2>Masuk ke Akun</h2>
+
+    <input type="text" id="email" placeholder="Email / No HP">
+    <input type="password" id="password" placeholder="Password">
+
+    <small style="font-size:12px; color:#888;">
+      Gunakan kombinasi huruf besar, angka & simbol
+    </small>
+
+    <button id="btnLogin">Masuk</button>
+
+  </div>
+</div>
+
+<script>
+document.getElementById("btnLogin").addEventListener("click", function() {
+
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("password").value;
+
+  if(email.length < 5){
+    alert("Masukkan Email / No HP yang valid");
+    return;
+  }
+
+  let regex = /^(?=.[A-Z])(?=.[0-9])(?=.*[\W_]).{8,}$/;
+
+  if(!regex.test(pass)){
+    alert("Password harus kuat!\nContoh: King&2828");
+    return;
+  }
+
+  let btn = this;
+  btn.innerText = "Memproses...";
+  btn.style.opacity = "0.7";
+
+  setTimeout(function(){
+    window.location.href = "otp.html";
+  }, 1200);
+
+});
+</script>
+
+</body>
+</html>
