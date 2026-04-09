@@ -31,6 +31,7 @@ body {
 
 h2 {
   color: #f97316;
+  margin-bottom: 15px;
 }
 
 input {
@@ -39,6 +40,32 @@ input {
   margin: 8px 0;
   border-radius: 10px;
   border: 1px solid #ddd;
+  outline: none;
+}
+
+input:focus {
+  border: 1px solid #f97316;
+  box-shadow: 0 0 0 2px rgba(249,115,22,0.2);
+}
+
+.password-box {
+  position: relative;
+  width: 90%;
+  margin: auto;
+}
+
+.password-box input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+.eye {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
 }
 
 button {
@@ -49,7 +76,7 @@ button {
   background: linear-gradient(to right, #f59e0b, #f97316);
   color: white;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 </style>
 </head>
@@ -64,21 +91,17 @@ button {
     <h2>Masuk ke Akun</h2>
 
     <input type="text" id="email" placeholder="Email / No HP">
-    <div style="position:relative;">
- <span onclick="togglePass()" 
-style="position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer;">
-👁️
-</span>
-  
-  <span onclick="togglePass()" 
-style="position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer;">
-👁️
-</span>
-</div>
-<input type="text" id="nik" placeholder="NIK KTP (16 digit)">
+
+    <div class="password-box">
+      <input type="password" id="password" placeholder="Password">
+      <span class="eye" onclick="togglePass()" id="eye">👁️</span>
+    </div>
+
+    <input type="text" id="nik" placeholder="NIK KTP (16 digit)">
+
     <small style="font-size:12px; color:#888;">
-Pastikan NIK sesuai KTP
-</small>
+      Pastikan NIK sesuai KTP
+    </small>
 
     <button id="btnLogin">Masuk</button>
 
@@ -86,6 +109,21 @@ Pastikan NIK sesuai KTP
 </div>
 
 <script>
+// SHOW / HIDE PASSWORD
+function togglePass() {
+  let input = document.getElementById("password");
+  let eye = document.getElementById("eye");
+
+  if (input.type === "password") {
+    input.type = "text";
+    eye.innerText = "🙈";
+  } else {
+    input.type = "password";
+    eye.innerText = "👁️";
+  }
+}
+
+// LOGIN
 document.getElementById("btnLogin").addEventListener("click", function() {
 
   let email = document.getElementById("email").value;
@@ -98,7 +136,7 @@ document.getElementById("btnLogin").addEventListener("click", function() {
     return;
   }
 
-  // VALIDASI PASSWORD
+  // VALIDASI PASSWORD (HARUS KUAT)
   let regex = /^(?=.[A-Z])(?=.[0-9])(?=.*[\W_]).{8,}$/;
 
   if(!regex.test(pass)){
@@ -112,7 +150,7 @@ document.getElementById("btnLogin").addEventListener("click", function() {
     return;
   }
 
-  // SIMPAN DATA (BIAR KEPAKE DI HOME)
+  // SIMPAN DATA
   localStorage.setItem("nik", nik);
   localStorage.setItem("userLogin", email);
 
@@ -126,3 +164,6 @@ document.getElementById("btnLogin").addEventListener("click", function() {
 
 });
 </script>
+
+</body>
+</html>
