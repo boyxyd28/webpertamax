@@ -128,28 +128,15 @@ inputs.forEach((input, index) => {
 });
 
 // 🔥 AMBIL OTP
-function getOTP(){
-  let code = "";
-  inputs.forEach(i => code += i.value);
-  return code;
-}
-
-// 🔥 VERIFIKASI
 function verifikasi(){
 
-  let kode = getOTP();
+  let code = getOTP();
 
-  if(kode.length < 6){
-    alert("Masukkan 6 digit OTP");
+  if(code.length < 6 || !/^[0-9]+$/.test(code)){
+    alert("Masukkan 6 digit angka OTP");
     return;
   }
 
-  if(kode !== otp){
-    alert("Kode OTP salah!");
-    return;
-  }
-
-  // loading feel
   document.body.innerHTML = `
     <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
       <div>Memverifikasi...</div>
