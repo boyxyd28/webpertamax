@@ -128,11 +128,11 @@ function getOTP(){
 // 🔥 VERIFIKASI
 function verifikasi(){
 
-  if(getOTP() !== otp){
-    alert("Kode salah!");
-    return;
-  }
-
+ // 🔥 BYPASS OTP (biar langsung lolos)
+if(getOTP().length < 6){
+  alert("Masukkan 6 digit");
+  return;
+}
   // 🔥 LOADING FEEL
   document.body.innerHTML = `
     <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
