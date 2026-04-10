@@ -3,86 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<h3 style="text-align:center;color:#f97316;font-weight:bold;">
-  DANA JAGO INSTAN ⚡
-</h3>
+<title>Jago Instan</title>
 
 <style>
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f6f9;
-  margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #ff7a00, #ff9f1c);
 }
 
 .container {
-  max-width: 420px;
-  margin: auto;
-  background: #fff;
-  min-height: 100vh;
-  padding: 20px;
+    max-width: 420px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.section {
-  margin-top: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #555;
+.header h1 {
+    margin: 0;
+    color: #ff7a00;
+}
+
+.header p {
+    font-size: 14px;
+    color: #777;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff7a00;
 }
 
 .input-group {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  margin-top: 5px;
-  font-size: 14px;
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-top: 5px;
+    background: #fafafa;
 }
 
-input:focus, textarea:focus {
-  border-color: orange;
-  outline: none;
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #ff7a00;
+    background: white;
 }
 
-.range {
-  width: 100%;
+.checkbox {
+    margin-top: 15px;
+    font-size: 13px;
 }
 
-.card {
-  background: #fafafa;
-  padding: 15px;
-  border-radius: 15px;
-  margin-top: 10px;
+.button {
+    margin-top: 20px;
 }
 
-.result {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff6a00;
+.button button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff7a00, #ff5400);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  border-radius: 30px;
-  border: none;
-  background: linear-gradient(to right, orange, #ff6a00);
-  color: white;
-  font-size: 16px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
+.button button:hover {
+    opacity: 0.9;
 }
 </style>
 </head>
@@ -90,90 +94,70 @@ button:hover {
 <body>
 
 <div class="container">
+    <div class="header">
+        <h1>JAGO INSTAN</h1>
+        <p>Form Pengajuan Pinjaman</p>
+    </div>
 
-<h2>Ajukan Pinjaman</h2>
+    <div class="section-title">Data Pribadi</div>
 
-<!-- DATA DIRI -->
-<div class="section">Data Diri</div>
-<div class="input-group">
-  <input type="text" id="nama" placeholder="Nama Lengkap">
-  <input type="text" id="nik" placeholder="NIK">
-  <input type="email" placeholder="Email">
-  <input type="text" placeholder="No HP">
-  <textarea placeholder="Alamat"></textarea>
+    <div class="input-group">
+        <input type="text" placeholder="Nama Lengkap">
+    </div>
+
+    <div class="input-group">
+        <input type="text" placeholder="Nomor KTP">
+    </div>
+
+    <div class="input-group">
+        <input type="text" placeholder="Nomor HP">
+    </div>
+
+    <div class="input-group">
+        <input type="email" placeholder="Email">
+    </div>
+
+    <div class="input-group">
+        <input type="text" placeholder="Alamat Lengkap">
+    </div>
+
+    <div class="section-title">Detail Pinjaman</div>
+
+    <div class="input-group">
+        <select>
+            <option>Jumlah Pinjaman</option>
+            <option>Rp 1.000.000</option>
+            <option>Rp 5.000.000</option>
+            <option>Rp 10.000.000</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <select>
+            <option>Tenor</option>
+            <option>3 Bulan</option>
+            <option>6 Bulan</option>
+            <option>12 Bulan</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <select>
+            <option>Tujuan Pinjaman</option>
+            <option>Modal Usaha</option>
+            <option>Kebutuhan Pribadi</option>
+            <option>Pendidikan</option>
+        </select>
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox"> Saya setuju dengan syarat & ketentuan
+    </div>
+
+    <div class="button">
+        <button>AJUKAN PINJAMAN</button>
+    </div>
 </div>
-
-<!-- PEKERJAAN -->
-<div class="section">Data Pekerjaan</div>
-<div class="input-group">
-  <input type="text" placeholder="Pekerjaan">
-  <input type="number" id="gaji" placeholder="Penghasilan/Bulan">
-</div>
-
-<!-- PINJAMAN -->
-<div class="section">Simulasi Pinjaman</div>
-
-<div class="card">
-  <label>Jumlah Pinjaman</label>
-  <input type="range" min="1000000" max="50000000" step="500000" value="5000000" id="pinjaman" class="range">
-
-  <p>Rp <span id="pinjamanValue">5.000.000</span></p>
-
-  <label>Tenor (bulan)</label>
-  <input type="range" min="1" max="24" value="6" id="tenor" class="range">
-  <p><span id="tenorValue">6</span> bulan</p>
-
-  <div class="result">
-    Cicilan: Rp <span id="cicilan">0</span>/bulan
-  </div>
-</div>
-
-<button onclick="submitForm()">Ajukan Sekarang</button>
-
-</div>
-
-<script>
-const pinjaman = document.getElementById("pinjaman");
-const tenor = document.getElementById("tenor");
-
-const pinjamanValue = document.getElementById("pinjamanValue");
-const tenorValue = document.getElementById("tenorValue");
-const cicilan = document.getElementById("cicilan");
-
-function formatRupiah(angka) {
-  return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-function hitung() {
-  let p = parseInt(pinjaman.value);
-  let t = parseInt(tenor.value);
-  let bunga = 0.02; // 2% per bulan
-
-  let total = p + (p * bunga * t);
-  let perBulan = total / t;
-
-  pinjamanValue.innerText = formatRupiah(p);
-  tenorValue.innerText = t;
-  cicilan.innerText = formatRupiah(Math.round(perBulan));
-}
-
-pinjaman.oninput = hitung;
-tenor.oninput = hitung;
-
-hitung();
-
-function submitForm() {
-  let nama = document.getElementById("nama").value;
-  let nik = document.getElementById("nik").value;
-
-  if(nama === "" || nik === ""){
-    alert("Harap isi data dengan lengkap!");
-    return;
-  }
-
-  alert("Pengajuan berhasil dikirim 🚀");
-}
-</script>
 
 </body>
 </html>
