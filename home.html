@@ -6,24 +6,92 @@
 <title>Jago Dana Cepat</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
 
 body{
   background:linear-gradient(to bottom,#f9a825,#f57c00);
   padding:15px;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 
+/* PAGE */
 .page{display:none;}
 .show{display:block;}
 
+/* CARD */
 .card{
   background:white;
-  padding:15px;
-  border-radius:16px;
-  margin-top:10px;
+  padding:20px;
+  border-radius:24px;
+  margin-top:15px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
 }
 
+/* TITLE */
+h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+h4{
+  margin-top:20px;
+  font-size:14px;
+  color:#444;
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border-radius:14px;
+  border:1px solid #eee;
+  background:#f7f7f7;
+  font-size:14px;
+}
+
+input:focus{
+  outline:none;
+  border:1px solid #f97316;
+  background:white;
+}
+
+/* GRID */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* CHECKBOX */
+label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  font-size:14px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  margin-top:25px;
+  padding:16px;
+  border-radius:999px;
+  border:none;
+  background:linear-gradient(to right,#f59e0b,#f97316);
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  box-shadow:0 10px 25px rgba(249,115,22,0.4);
+}
+
+/* NAV */
 .bottom-bar{
   position:fixed;
   bottom:0;
@@ -32,7 +100,9 @@ body{
   display:flex;
   justify-content:space-around;
   background:white;
-  padding:12px;
+  padding:14px;
+  border-radius:20px 20px 0 0;
+  box-shadow:0 -5px 20px rgba(0,0,0,0.1);
 }
 </style>
 </head>
@@ -56,44 +126,52 @@ body{
   </div>
 </div>
 
-<!-- PENGAJUAN -->
+<!-- FORM PINJAMAN -->
 <div id="pengajuanPage" class="page">
-<div class="card">
+  <div class="card">
 
-<h3>📋 Form Pengajuan Pinjaman</h3>
+<h3>📋 Pengajuan Pinjaman</h3>
 
 <h4>🧍 Data Diri</h4>
-<input id="nama" placeholder="Nama Lengkap">
-<input id="nik" placeholder="NIK">
-<input id="email" placeholder="Email">
-<input id="hp" placeholder="No. HP">
+<div class="grid-2">
+  <input id="nama" placeholder="Nama Lengkap">
+  <input id="nik" placeholder="NIK">
+  <input id="email" placeholder="Email">
+  <input id="hp" placeholder="No. HP">
+</div>
 <input id="alamat" placeholder="Alamat">
 
-<h4>💼 Data Pekerjaan</h4>
-<input id="pekerjaan" placeholder="Pekerjaan">
-<input id="gaji" placeholder="Penghasilan / Bulan">
+<h4>💼 Pekerjaan</h4>
+<div class="grid-2">
+  <input id="pekerjaan" placeholder="Pekerjaan">
+  <input id="gaji" placeholder="Penghasilan / Bulan">
+</div>
 <input id="sumber" placeholder="Sumber Penghasilan">
 
-<h4>💰 Data Pinjaman</h4>
-<input id="pinjam" placeholder="Jumlah Pinjaman">
-<input id="tenor" placeholder="Tenor (bulan)">
+<h4>💰 Pinjaman</h4>
+<div class="grid-2">
+  <input id="pinjam" placeholder="Jumlah Pinjaman">
+  <input id="tenor" placeholder="Tenor (bulan)">
+</div>
 <input id="tujuan" placeholder="Tujuan Pinjaman">
 
-<h4>📸 Verifikasi Digital</h4>
-<label><input type="checkbox"> Upload KTP</label><br>
-<label><input type="checkbox"> Selfie dengan KTP</label><br>
-<label><input type="checkbox"> Akses Kontak</label><br>
+<h4>📸 Verifikasi</h4>
+<label><input type="checkbox"> Upload KTP</label>
+<label><input type="checkbox"> Selfie dengan KTP</label>
+<label><input type="checkbox"> Akses Kontak</label>
 <label><input type="checkbox"> Akses Lokasi</label>
 
 <h4>✅ Persetujuan</h4>
-<label><input type="checkbox" id="agree1"> Saya menyetujui syarat & ketentuan</label><br>
-<label><input type="checkbox" id="agree2"> Data digunakan untuk analisa kredit</label>
+<label><input type="checkbox" id="agree1"> Syarat & Ketentuan</label>
+<label><input type="checkbox" id="agree2"> Analisa Kredit</label>
 
 <button onclick="proses()">Ajukan Sekarang</button>
 
 <div id="hasil"></div>
 
+  </div>
 </div>
+
 <!-- RIWAYAT -->
 <div id="riwayatPage" class="page">
   <h3>Riwayat</h3>
@@ -112,12 +190,6 @@ body{
   NIK: <span id="profilNik"></span>
 </div>
 
-<!-- NOTIF -->
-<div id="notifPage" class="page">
-  <h3>Notifikasi</h3>
-  <div id="notifBox"></div>
-</div>
-
 <!-- NAV -->
 <div class="bottom-bar">
   <div onclick="showPage('dashboardPage')">🏠</div>
@@ -129,34 +201,48 @@ body{
 
 <script>
 
-// NAV
 function showPage(page){
-  const pages = ["dashboardPage","pengajuanPage","riwayatPage","cairPage","profilPage","notifPage"];
+  const pages = ["dashboardPage","pengajuanPage","riwayatPage","cairPage","profilPage"];
   pages.forEach(p=>document.getElementById(p).classList.remove("show"));
   document.getElementById(page).classList.add("show");
 }
 
-// PROSES
 function proses(){
+
+  let nama = document.getElementById("nama").value;
+  let nik = document.getElementById("nik").value;
   let gaji = parseInt(document.getElementById("gaji").value||0);
   let pinjam = parseInt(document.getElementById("pinjam").value||0);
-  let bulan = parseInt(document.getElementById("bulan").value);
+  let tenor = document.getElementById("tenor").value;
 
-  let limit = gaji*5;
-  let cicilan = pinjam/bulan;
-  let status = pinjam>limit?"❌ Ditolak":"✅ Disetujui";
+  let agree1 = document.getElementById("agree1").checked;
+  let agree2 = document.getElementById("agree2").checked;
+
+  if(!nama || !nik || !gaji || !pinjam){
+    alert("Lengkapi data dulu");
+    return;
+  }
+
+  if(!agree1 || !agree2){
+    alert("Harus setujui persyaratan");
+    return;
+  }
+
+  let limit = gaji * 5;
+  let cicilan = pinjam / (tenor || 12);
+  let status = pinjam > limit ? "❌ Ditolak" : "✅ Disetujui";
 
   document.getElementById("hasil").innerHTML = `
-   <div class="card">
+    <div class="card">
       Limit: Rp ${limit.toLocaleString("id-ID")}<br>
       Cicilan: Rp ${Math.floor(cicilan).toLocaleString("id-ID")}<br>
       Status: ${status}
     </div>
   `;
 
-  localStorage.setItem("nama",document.getElementById("nama").value);
-  localStorage.setItem("nik",document.getElementById("nik").value);
-  localStorage.setItem("limit",limit);
+  localStorage.setItem("nama", nama);
+  localStorage.setItem("nik", nik);
+  localStorage.setItem("limit", limit);
 
   notif("Pengajuan berhasil");
 
@@ -166,13 +252,10 @@ function proses(){
   },1000);
 }
 
-// NOTIF
 function notif(text){
-  let n = document.getElementById("notifBox");
-  n.innerHTML = '<div class="card">'+text+'</div>'+n.innerHTML;
+  alert(text);
 }
 
-// LOAD DATA
 function loadData(){
   let nama = localStorage.getItem("nama") || "Nasabah";
   let nik = localStorage.getItem("nik") || "-";
