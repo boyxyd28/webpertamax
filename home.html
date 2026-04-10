@@ -58,23 +58,42 @@ body{
 
 <!-- PENGAJUAN -->
 <div id="pengajuanPage" class="page">
-  <div class="card">
-    <h3>Form Pinjaman</h3>
-    <input id="nama" placeholder="Nama">
-    <input id="nik" placeholder="NIK">
-    <input id="gaji" placeholder="Gaji">
-    <input id="pinjam" placeholder="Jumlah Pinjaman">
+ div class="card">
 
-    <select id="bulan">
-      <option value="12">12 Bulan</option>
-      <option value="24">24 Bulan</option>
-    </select>
+<h3>📋 Form Pengajuan Pinjaman</h3>
 
-    <button onclick="proses()">Ajukan</button>
-    <div id="hasil"></div>
-  </div>
+<h4>🧍 Data Diri</h4>
+<input id="nama" placeholder="Nama Lengkap">
+<input id="nik" placeholder="NIK">
+<input id="email" placeholder="Email">
+<input id="hp" placeholder="No. HP">
+<input id="alamat" placeholder="Alamat">
+
+<h4>💼 Data Pekerjaan</h4>
+<input id="pekerjaan" placeholder="Pekerjaan">
+<input id="gaji" placeholder="Penghasilan / Bulan">
+<input id="sumber" placeholder="Sumber Penghasilan">
+
+<h4>💰 Data Pinjaman</h4>
+<input id="pinjam" placeholder="Jumlah Pinjaman">
+<input id="tenor" placeholder="Tenor (bulan)">
+<input id="tujuan" placeholder="Tujuan Pinjaman">
+
+<h4>📸 Verifikasi Digital</h4>
+<label><input type="checkbox"> Upload KTP</label><br>
+<label><input type="checkbox"> Selfie dengan KTP</label><br>
+<label><input type="checkbox"> Akses Kontak</label><br>
+<label><input type="checkbox"> Akses Lokasi</label>
+
+<h4>✅ Persetujuan</h4>
+<label><input type="checkbox" id="agree1"> Saya menyetujui syarat & ketentuan</label><br>
+<label><input type="checkbox" id="agree2"> Data digunakan untuk analisa kredit</label>
+
+<button onclick="proses()">Ajukan Sekarang</button>
+
+<div id="hasil"></div>
+
 </div>
-
 <!-- RIWAYAT -->
 <div id="riwayatPage" class="page">
   <h3>Riwayat</h3>
