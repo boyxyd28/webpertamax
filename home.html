@@ -3,149 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fintech App</title>
+<title>JAGO DANA INSTAN</title>
 
 <style>
-body{
-  margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(to bottom,#f9a825,#f57c00);
-  padding:20px;
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+  margin: 0;
 }
 
-/* HEADER */
-.header{
-  background:linear-gradient(to right,#f59e0b,#f97316);
-  padding:20px;
-  border-radius:20px;
-  color:white;
-  margin-bottom:20px;
+.container {
+  max-width: 420px;
+  margin: auto;
+  background: #fff;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-/* GRID MENU */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:20px;
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.card{
-  background:white;
-  padding:20px;
-  border-radius:20px;
-  text-align:center;
-  cursor:pointer;
-  box-shadow:0 10px 20px rgba(0,0,0,0.1);
-  transition:0.2s;
+.section {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
 }
 
-.card:hover{
-  transform:translateY(-3px);
+.input-group {
+  margin-top: 10px;
 }
 
-/* FORM */
-.form-box{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+input, textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
-h3{
-  margin-bottom:15px;
-  text-align:center;
+input:focus, textarea:focus {
+  border-color: orange;
+  outline: none;
 }
 
-/* INPUT */
-input{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  background:#f9f9f9;
+.range {
+  width: 100%;
 }
 
-/* BUTTON */
-button{
-  width:100%;
-  padding:15px;
-  margin-top:20px;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(to right,#f59e0b,#f97316);
-  color:white;
-  font-weight:bold;
-  font-size:16px;
+.card {
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+.result {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff6a00;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(to right, orange, #ff6a00);
+  color: white;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 </style>
 </head>
 
 <body>
 
-<!-- DASHBOARD -->
-<div id="dashboardPage" class="show">
+<div class="container">
 
- <div class="header">
-  <div>Selamat datang</div>
-  <div style="font-size:24px;font-weight:bold;">Rp 0</div>
+<h2>Ajukan Pinjaman</h2>
+
+<!-- DATA DIRI -->
+<div class="section">Data Diri</div>
+<div class="input-group">
+  <input type="text" id="nama" placeholder="Nama Lengkap">
+  <input type="text" id="nik" placeholder="NIK">
+  <input type="email" placeholder="Email">
+  <input type="text" placeholder="No HP">
+  <textarea placeholder="Alamat"></textarea>
 </div>
 
-  <div class="grid">
-    <div class="card" onclick="showPage('pengajuanPage')">💰<br>Pinjam</div>
-    <div class="card">💸<br>Cair</div>
-    <div class="card">👤<br>Profil</div>
+<!-- PEKERJAAN -->
+<div class="section">Data Pekerjaan</div>
+<div class="input-group">
+  <input type="text" placeholder="Pekerjaan">
+  <input type="number" id="gaji" placeholder="Penghasilan/Bulan">
+</div>
+
+<!-- PINJAMAN -->
+<div class="section">Simulasi Pinjaman</div>
+
+<div class="card">
+  <label>Jumlah Pinjaman</label>
+  <input type="range" min="1000000" max="50000000" step="500000" value="5000000" id="pinjaman" class="range">
+
+  <p>Rp <span id="pinjamanValue">5.000.000</span></p>
+
+  <label>Tenor (bulan)</label>
+  <input type="range" min="1" max="24" value="6" id="tenor" class="range">
+  <p><span id="tenorValue">6</span> bulan</p>
+
+  <div class="result">
+    Cicilan: Rp <span id="cicilan">0</span>/bulan
   </div>
-
 </div>
 
-<!-- FORM -->
-<div id="pengajuanPage" class="page">
+<button onclick="submitForm()">Ajukan Sekarang</button>
 
- <div class="form-box">
-  <h3>Form Pinjaman</h3>
-
-  <input placeholder="Nama">
-  <input placeholder="NIK">
-  <input placeholder="Gaji">
-  <input placeholder="Jumlah Pinjaman">
-
-  <button>Ajukan</button>
-</div>
 </div>
 
 <script>
+const pinjaman = document.getElementById("pinjaman");
+const tenor = document.getElementById("tenor");
 
-function showPage(page){
-  document.getElementById("dashboardPage").classList.remove("show");
-  document.getElementById("pengajuanPage").classList.remove("show");
+const pinjamanValue = document.getElementById("pinjamanValue");
+const tenorValue = document.getElementById("tenorValue");
+const cicilan = document.getElementById("cicilan");
 
-  document.getElementById(page).classList.add("show");
+function formatRupiah(angka) {
+  return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-function proses(){
+function hitung() {
+  let p = parseInt(pinjaman.value);
+  let t = parseInt(tenor.value);
+  let bunga = 0.02; // 2% per bulan
 
+  let total = p + (p * bunga * t);
+  let perBulan = total / t;
+
+  pinjamanValue.innerText = formatRupiah(p);
+  tenorValue.innerText = t;
+  cicilan.innerText = formatRupiah(Math.round(perBulan));
+}
+
+pinjaman.oninput = hitung;
+tenor.oninput = hitung;
+
+hitung();
+
+function submitForm() {
   let nama = document.getElementById("nama").value;
-  let gaji = parseInt(document.getElementById("gaji").value||0);
+  let nik = document.getElementById("nik").value;
 
-  if(!nama || !gaji){
-    alert("Isi data dulu");
+  if(nama === "" || nik === ""){
+    alert("Harap isi data dengan lengkap!");
     return;
   }
 
-  let limit = gaji * 5;
-
-  localStorage.setItem("limit", limit);
-
-  alert("Berhasil!");
-
-  document.getElementById("saldo").innerText = "Rp " + limit;
-
-  showPage("dashboardPage");
+  alert("Pengajuan berhasil dikirim 🚀");
 }
-
 </script>
 
 </body>
