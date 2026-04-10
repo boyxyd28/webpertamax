@@ -135,8 +135,10 @@ small{
   </div>
 
   <div style="margin-top:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-<div onclick="showPage('pengajuanPage')" class="card">💰<br><small>Pinjam</small></div>
-<div onclick="showPage('riwayatPage')" class="card">🧾<br><small>Riwayat</small></div>
+<div onclick="alert('KE KLIK')" class="card">💰<br><small>Pinjam</small></div>
+<div onclick="goPinjam()" class="card">
+  💰<br><small>Pinjam</small>
+</div>
 <div onclick="showPage('cairPage')" class="card">💸<br><small>Cair</small></div>
 <div onclick="showPage('profilPage')" class="card">👤<br><small>Profil</small></div>
   </div>
@@ -227,8 +229,14 @@ small{
 
 function showPage(page){
   const pages = ["dashboardPage","pengajuanPage","riwayatPage","cairPage","profilPage"];
-  pages.forEach(p=>document.getElementById(p).classList.remove("show"));
-  document.getElementById(page).classList.add("show");
+
+  pages.forEach(p=>{
+    let el = document.getElementById(p);
+    if(el) el.classList.remove("show");
+  });
+
+  let target = document.getElementById(page);
+  if(target) target.classList.add("show");
 }
 
 function proses(){
@@ -253,31 +261,17 @@ function proses(){
   }
 
   let limit = gaji * 5;
-  let cicilan = pinjam / (tenor || 12);
-  let status = pinjam > limit ? "❌ Ditolak" : "✅ Disetujui";
-
-  document.getElementById("hasil").innerHTML = `
-    <div class="card">
-      Limit: Rp ${limit.toLocaleString("id-ID")}<br>
-      Cicilan: Rp ${Math.floor(cicilan).toLocaleString("id-ID")}<br>
-      Status: ${status}
-    </div>
-  `;
 
   localStorage.setItem("nama", nama);
   localStorage.setItem("nik", nik);
   localStorage.setItem("limit", limit);
 
-  notif("Pengajuan berhasil");
+  alert("Pengajuan berhasil");
 
   setTimeout(()=>{
     loadData();
     showPage("dashboardPage");
   },1000);
-}
-
-function notif(text){
-  alert(text);
 }
 
 function loadData(){
@@ -291,43 +285,63 @@ function loadData(){
   document.getElementById("saldo").innerText = "Rp "+limit.toLocaleString("id-ID");
 }
 
-window.onload = loadData;
+// 🔥 JALANIN SAAT HALAMAN READY
+window.onload = function(){
 
+  loadData();
 
-// 🔥 TARUH DI SINI (PALING BAWAH DALAM SCRIPT)
-
-// PREVIEW KTP
-document.getElementById("ktp").addEventListener("change", function(e){
-  let file = e.target.files[0];
-  if(file){
-    let reader = new FileReader();
-    reader.onload = function(){
-      let img = document.getElementById("previewKtp");
-      img.src = reader.result;
-      img.style.display = "block";
-    }
-    reader.readAsDataURL(file);
+  // PREVIEW KTP
+  let ktp = document.getElementById("ktp");
+  if(ktp){
+    ktp.addEventListener("change", function(e){
+      let file = e.target.files[0];
+      if(file){
+        let reader = new FileReader();
+        reader.onload = function(){
+          let img = document.getElementById("previewKtp");
+          img.src = reader.result;
+          img.style.display = "block";
+        }
+        reader.readAsDataURL(file);
+      }
+    });
   }
-});
 
-// PREVIEW SELFIE
-document.getElementById("selfie").addEventListener("change", function(e){
-  let file = e.target.files[0];
-  if(file){
-    let reader = new FileReader();
-    reader.onload = function(){
-      let img = document.getElementById("previewSelfie");
-      img.src = reader.result;
-      img.style.display = "block";
-    }
-    reader.readAsDataURL(file);
+  // PREVIEW SELFIE
+  let selfie = document.getElementById("selfie");
+  if(selfie){
+    selfie.addEventListener("change", function(e){
+      let file = e.target.files[0];
+      if(file){
+        let reader = new FileReader();
+        reader.onload = function(){
+          let img = document.getElementById("previewSelfie");
+          img.src = reader.result;
+          img.style.display = "block";
+        }
+        reader.readAsDataURL(file);
+      }
+    });
   }
-});
 
+}
 
-window.onload = loadData;
+<script>
+
+function showPage(page){
+  ...
+}
+
+function proses(){
+  ...
+}
+
+// 🔥 TARUH DI SINI
+function goPinjam(){
+  alert("klik pinjam berhasil");
+  document.getElementById("dashboardPage").classList.remove("show");
+  document.getElementById("pengajuanPage").classList.add("show");
+}
 
 </script>
-
-</body>
-</html>
+  
