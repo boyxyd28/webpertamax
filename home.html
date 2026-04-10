@@ -111,6 +111,15 @@ button{
   border-radius:20px 20px 0 0;
   box-shadow:0 -5px 20px rgba(0,0,0,0.1);
 }
+
+/* 🔥 TAMBAH DI SINI */
+small{
+  display:block;
+  margin-top:5px;
+  color:#888;
+  font-size:12px;
+}
+
 </style>
 </head>
 
@@ -166,11 +175,12 @@ button{
 <h4>📸 Verifikasi</h4>
 
 <label>Upload KTP</label>
-<input type="file" id="ktp" accept="image/*">
+<input type="file" id="ktp" accept="image/*" capture="environment"> 
+<small style="color:#888;">📷 Gunakan kamera untuk hasil terbaik</small> 
 <img id="previewKtp" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
 
 <label>Selfie dengan KTP</label>
-<input type="file" id="selfie" accept="image/*">
+<input type="file" id="selfie" accept="image/*" capture="user">
 <img id="previewSelfie" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
 <label><input type="checkbox"> Akses Kontak</label>
 <label><input type="checkbox"> Akses Lokasi</label>
