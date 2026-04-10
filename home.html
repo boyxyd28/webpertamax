@@ -3,121 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jago Dana Cepat</title>
+
+<title>Fintech App</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
-}
-
 body{
+  margin:0;
+  font-family:Arial;
   background:linear-gradient(to bottom,#f9a825,#f57c00);
   padding:15px;
-  padding-bottom:90px;
 }
 
-/* PAGE */
 .page{display:none;}
 .show{display:block;}
 
-/* CARD */
 .card{
   background:white;
   padding:20px;
-  border-radius:24px;
+  border-radius:20px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
   margin-top:15px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.1);
 }
 
-/* TITLE */
-h3{
-  font-size:18px;
-  margin-bottom:10px;
-}
-
-h4{
-  margin-top:20px;
-  font-size:14px;
-  color:#444;
-}
-
-/* INPUT */
 input{
   width:100%;
-  padding:14px;
-  margin-top:8px;
-  border-radius:14px;
-  border:1px solid #eee;
-  background:#f7f7f7;
-  font-size:14px;
-}
-
-input:focus{
-  outline:none;
-  border:1px solid #f97316;
-  background:white;
-}
-
-/* GRID */
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-/* CHECKBOX */
-label{
-  display:flex;
-  align-items:center;
-  gap:10px;
+  padding:12px;
   margin-top:10px;
-  font-size:14px;
-  justify-content:flex-start;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 
-/* FIX CHECKBOX */
-input[type="checkbox"]{
-  width:18px;
-  height:18px;
-  accent-color:#f97316;
-}
-/* BUTTON */
 button{
   width:100%;
-  margin-top:25px;
-  padding:16px;
-  border-radius:999px;
-  border:none;
-  background:linear-gradient(to right,#f59e0b,#f97316);
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  box-shadow:0 10px 25px rgba(249,115,22,0.4);
-}
-
-/* NAV */
-.bottom-bar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  display:flex;
-  justify-content:space-around;
-  background:white;
   padding:14px;
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -5px 20px rgba(0,0,0,0.1);
-}
-
-/* 🔥 TAMBAH DI SINI */
-small{
-  display:block;
-  margin-top:5px;
-  color:#888;
-  font-size:12px;
+  margin-top:20px;
+  border:none;
+  border-radius:999px;
+  background:orange;
+  color:white;
 }
 
 </style>
@@ -126,246 +56,70 @@ small{
 <body>
 
 <!-- DASHBOARD -->
-<div id="dashboardPage" class="page show">
-  <div style="background:linear-gradient(to right,#f59e0b,#f97316);padding:20px;border-radius:20px;color:white;">
-    <div>Selamat datang 👋</div>
-    <div id="namaUser"><b>Nasabah</b></div>
-    <div style="margin-top:10px;">Saldo Anda</div>
-    <div id="saldo" style="font-size:26px;font-weight:bold;">Rp 0</div>
+<div id="dashboardPage" class="show">
+
+  <div style="background:orange;color:white;padding:20px;border-radius:20px;">
+    <h3>Selamat datang</h3>
+    <div id="saldo">Rp 0</div>
   </div>
 
-  <div style="margin-top:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-
-<div onclick="goPinjam()" class="card">
-  💰<br><small>Pinjam</small>
-</div>
-<div onclick="showPage('cairPage')" class="card">💸<br><small>Cair</small></div>
-<div onclick="showPage('profilPage')" class="card">👤<br><small>Profil</small></div>
+  <div class="grid">
+    <div class="card" onclick="showPage('pengajuanPage')">💰<br>Pinjam</div>
+    <div class="card">💸<br>Cair</div>
+    <div class="card">👤<br>Profil</div>
   </div>
+
 </div>
 
-<!-- FORM PINJAMAN -->
+<!-- FORM -->
 <div id="pengajuanPage" class="page">
+
   <div class="card">
 
-<h3>📋 Pengajuan Pinjaman</h3>
+    <h3>Form Pinjaman</h3>
 
-<h4>🧍 Data Diri</h4>
-<div class="grid-2">
-  <input id="nama" placeholder="Nama Lengkap">
-  <input id="nik" placeholder="NIK">
-  <input id="email" placeholder="Email">
-  <input id="hp" placeholder="No. HP">
-</div>
-<input id="alamat" placeholder="Alamat">
+    <input id="nama" placeholder="Nama">
+    <input id="nik" placeholder="NIK">
+    <input id="gaji" placeholder="Gaji">
+    <input id="pinjam" placeholder="Jumlah Pinjaman">
 
-<h4>💼 Pekerjaan</h4>
-<div class="grid-2">
-  <input id="pekerjaan" placeholder="Pekerjaan">
-  <input id="gaji" placeholder="Penghasilan / Bulan">
-</div>
-<input id="sumber" placeholder="Sumber Penghasilan">
-
-<h4>💰 Pinjaman</h4>
-<div class="grid-2">
-  <input id="pinjam" placeholder="Jumlah Pinjaman">
-  <input id="tenor" placeholder="Tenor (bulan)">
-</div>
-<input id="tujuan" placeholder="Tujuan Pinjaman">
-
-<h4>📸 Verifikasi</h4>
-<h4>📸 Verifikasi</h4>
-
-<label>Upload KTP</label>
-<input type="file" id="ktp" accept="image/*" capture="environment"> 
-<small style="color:#888;">📷 Gunakan kamera untuk hasil terbaik</small> 
-<img id="previewKtp" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
-
-<label>Selfie dengan KTP</label>
-<input type="file" id="selfie" accept="image/*" capture="user">
-<img id="previewSelfie" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
-<label><input type="checkbox"> Akses Kontak</label>
-<label><input type="checkbox"> Akses Lokasi</label>
-
-<h4>✅ Persetujuan</h4>
-<label><input type="checkbox" id="agree1"> Syarat & Ketentuan</label>
-<label><input type="checkbox" id="agree2"> Analisa Kredit</label>
-
-<button onclick="proses()">Ajukan Sekarang</button>
-
-<div id="hasil"></div>
+    <button onclick="proses()">Ajukan</button>
 
   </div>
-</div>
 
-<!-- RIWAYAT -->
-<div id="riwayatPage" class="page">
-  <h3>Riwayat</h3>
-  <div id="riwayatBox"></div>
-</div>
-
-<!-- CAIR -->
-<div id="cairPage" class="page">
-  <h3>Pencairan</h3>
-  <button onclick="notif('Dana diproses')">Cairkan</button>
-</div>
-
-<!-- PROFIL -->
-<div id="profilPage" class="page">
-  Nama: <span id="profilNama"></span><br>
-  NIK: <span id="profilNik"></span>
-</div>
-
-<!-- NAV -->
-<div class="bottom-bar">
-  <div onclick="showPage('dashboardPage')">🏠</div>
-  <div onclick="showPage('pengajuanPage')">📋</div>
-  <div onclick="showPage('riwayatPage')">🧾</div>
-  <div onclick="showPage('cairPage')">💸</div>
-  <div onclick="showPage('profilPage')">👤</div>
 </div>
 
 <script>
 
 function showPage(page){
-  const pages = ["dashboardPage","pengajuanPage","riwayatPage","cairPage","profilPage"];
+  document.getElementById("dashboardPage").classList.remove("show");
+  document.getElementById("pengajuanPage").classList.remove("show");
 
-  pages.forEach(p=>{
-    let el = document.getElementById(p);
-    if(el) el.classList.remove("show");
-  });
-
-  let target = document.getElementById(page);
-  if(target) target.classList.add("show");
+  document.getElementById(page).classList.add("show");
 }
 
 function proses(){
 
   let nama = document.getElementById("nama").value;
-  let nik = document.getElementById("nik").value;
   let gaji = parseInt(document.getElementById("gaji").value||0);
-  let pinjam = parseInt(document.getElementById("pinjam").value||0);
-  let tenor = document.getElementById("tenor").value;
 
-  let agree1 = document.getElementById("agree1").checked;
-  let agree2 = document.getElementById("agree2").checked;
-
-  if(!nama || !nik || !gaji || !pinjam){
-    alert("Lengkapi data dulu");
-    return;
-  }
-
-  if(!agree1 || !agree2){
-    alert("Harus setujui persyaratan");
+  if(!nama || !gaji){
+    alert("Isi data dulu");
     return;
   }
 
   let limit = gaji * 5;
 
-  localStorage.setItem("nama", nama);
-  localStorage.setItem("nik", nik);
   localStorage.setItem("limit", limit);
 
-  alert("Pengajuan berhasil");
+  alert("Berhasil!");
 
-  setTimeout(()=>{
-    loadData();
-    showPage("dashboardPage");
-  },1000);
+  document.getElementById("saldo").innerText = "Rp " + limit;
+
+  showPage("dashboardPage");
 }
 
-function loadData(){
-  let nama = localStorage.getItem("nama") || "Nasabah";
-  let nik = localStorage.getItem("nik") || "-";
-  let limit = parseInt(localStorage.getItem("limit")||0);
+</script>
 
-  document.getElementById("namaUser").innerText = nama;
-  document.getElementById("profilNama").innerText = nama;
-  document.getElementById("profilNik").innerText = nik;
-  document.getElementById("saldo").innerText = "Rp "+limit.toLocaleString("id-ID");
-}
-
-// 🔥 JALANIN SAAT HALAMAN READY
-window.onload = function(){
-
-  loadData();
-
-  // PREVIEW KTP
-  let ktp = document.getElementById("ktp");
-  if(ktp){
-    ktp.addEventListener("change", function(e){
-      let file = e.target.files[0];
-      if(file){
-        let reader = new FileReader();
-        reader.onload = function(){
-          let img = document.getElementById("previewKtp");
-          img.src = reader.result;
-          img.style.display = "block";
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  // PREVIEW SELFIE
-  let selfie = document.getElementById("selfie");
-  if(selfie){
-    selfie.addEventListener("change", function(e){
-      let file = e.target.files[0];
-      if(file){
-        let reader = new FileReader();
-        reader.onload = function(){
-          let img = document.getElementById("previewSelfie");
-          img.src = reader.result;
-          img.style.display = "block";
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-}
-
-<script>
-
-function showPage(page){
-  ...
-}
-
-function proses(){
-  ...
-}
-
-// 🔥 TARUH DI SINI
-function goPinjam(){
-  alert("klik pinjam berhasil");
-  document.getElementById("dashboardPage").classList.remove("show");
-  document.getElementById("pengajuanPage").classList.add("show");
-}
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-/* CSS LU */
-.card{
-  cursor:pointer;
-  position:relative;
-  z-index:9999;
-}
-
-.bottom-bar{
-  z-index:1;
-}
-
-.page{
-  position:relative;
-  z-index:1;
-}
-
-</style>
-
-</head>
-  
+</body>
+</html>
