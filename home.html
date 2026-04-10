@@ -163,8 +163,15 @@ button{
 <input id="tujuan" placeholder="Tujuan Pinjaman">
 
 <h4>📸 Verifikasi</h4>
-<label><input type="checkbox"> Upload KTP</label>
-<label><input type="checkbox"> Selfie dengan KTP</label>
+<h4>📸 Verifikasi</h4>
+
+<label>Upload KTP</label>
+<input type="file" id="ktp" accept="image/*">
+<img id="previewKtp" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
+
+<label>Selfie dengan KTP</label>
+<input type="file" id="selfie" accept="image/*">
+<img id="previewSelfie" style="width:100%;margin-top:10px;border-radius:10px;display:none;">
 <label><input type="checkbox"> Akses Kontak</label>
 <label><input type="checkbox"> Akses Lokasi</label>
 
@@ -275,6 +282,42 @@ function loadData(){
 }
 
 window.onload = loadData;
+<script>
+
+// function kamu yang sudah ada
+function proses(){
+  ...
+}
+
+// 🔥 TARUH DI SINI (PALING BAWAH DALAM SCRIPT)
+
+// PREVIEW KTP
+document.getElementById("ktp").addEventListener("change", function(e){
+  let file = e.target.files[0];
+  if(file){
+    let reader = new FileReader();
+    reader.onload = function(){
+      let img = document.getElementById("previewKtp");
+      img.src = reader.result;
+      img.style.display = "block";
+    }
+    reader.readAsDataURL(file);
+  }
+});
+
+// PREVIEW SELFIE
+document.getElementById("selfie").addEventListener("change", function(e){
+  let file = e.target.files[0];
+  if(file){
+    let reader = new FileReader();
+    reader.onload = function(){
+      let img = document.getElementById("previewSelfie");
+      img.src = reader.result;
+      img.style.display = "block";
+    }
+    reader.readAsDataURL(file);
+  }
+});
 
 </script>
 
