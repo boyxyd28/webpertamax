@@ -184,16 +184,19 @@ function verifikasi(){
 
   let code = getOTP();
 
-  if(code.length < 6){
-    alert("Masukkan 6 digit OTP");
+  // wajib 6 digit
+  if(code.length !== 6){
+    alert("OTP harus 6 digit");
     return;
   }
 
-  if(code !== otp){
-    alert("OTP salah!");
+  // harus angka semua
+  if(!/^[0-9]+$/.test(code)){
+    alert("OTP hanya boleh angka");
     return;
   }
 
+  // loading
   document.body.innerHTML = `
     <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
       Memverifikasi...
@@ -204,7 +207,6 @@ function verifikasi(){
     window.location.href = "home.html";
   },1000);
 }
-
 // ✅ TAMBAH INI JUGA
 function getOTP(){
   let inputs = document.querySelectorAll(".otp-input input");
