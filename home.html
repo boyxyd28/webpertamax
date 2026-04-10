@@ -135,10 +135,10 @@ small{
   </div>
 
   <div style="margin-top:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-    <div onclick="showPage('pengajuanPage')" class="card">💰<br><small>Pinjam</small></div>
-    <div onclick="showPage('riwayatPage')" class="card">🧾<br><small>Riwayat</small></div>
-    <div onclick="showPage('cairPage')" class="card">💸<br><small>Cair</small></div>
-    <div onclick="showPage('profilPage')" class="card">👤<br><small>Profil</small></div>
+<div onclick="showPage('pengajuanPage')" class="card">💰<br><small>Pinjam</small></div>
+<div onclick="showPage('riwayatPage')" class="card">🧾<br><small>Riwayat</small></div>
+<div onclick="showPage('cairPage')" class="card">💸<br><small>Cair</small></div>
+<div onclick="showPage('profilPage')" class="card">👤<br><small>Profil</small></div>
   </div>
 </div>
 
@@ -330,6 +330,12 @@ document.getElementById("selfie").addEventListener("change", function(e){
 });
 
 </script>
+function showPage(page){
+  alert("klik: " + page); // TEST
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("show"));
+  document.getElementById(page).classList.add("show");
+}
+  </script>
 
 </body>
 </html>
