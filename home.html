@@ -329,13 +329,22 @@ document.getElementById("selfie").addEventListener("change", function(e){
   }
 });
 
-</script>
+<script>
+
+function proses(){ ... }
+
+function loadData(){ ... }
+
+window.onload = loadData;
+
+// 🔥 showPage DI DALAM
 function showPage(page){
-  alert("klik: " + page); // TEST
+  alert("klik: " + page);
   document.querySelectorAll(".page").forEach(p => p.classList.remove("show"));
   document.getElementById(page).classList.add("show");
 }
-  </script>
+
+</script>
 
 </body>
 </html>
