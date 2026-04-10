@@ -93,32 +93,21 @@ button {
 // 🔥 AMBIL NIK
 let nik = localStorage.getItem("nik") || "";
 let nomor = "+62 8**" + nik.slice(-3);
-
-// tampilkan nomor
 document.querySelector("p").innerText = "Kode dikirim ke " + nomor;
 
-// 🔥 GENERATE OTP
-let otp = Math.floor(100000 + Math.random() * 900000).toString();
-console.log("OTP:", otp); // 👉 tampil di console (lebih aman dari alert)
-
-// 🔥 INPUT
+// 🔥 INPUT OTP
 let inputs = document.querySelectorAll(".otp-input input");
 
 inputs.forEach((input, index) => {
 
   input.addEventListener("input", () => {
-
-    // hanya angka
     input.value = input.value.replace(/[^0-9]/g, "");
 
-    // auto pindah
     if(input.value && index < 5){
       inputs[index + 1].focus();
     }
-
   });
 
-  // 🔥 backspace balik
   input.addEventListener("keydown", (e) => {
     if(e.key === "Backspace" && !input.value && index > 0){
       inputs[index - 1].focus();
@@ -127,25 +116,35 @@ inputs.forEach((input, index) => {
 
 });
 
-// 🔥 AMBIL OTP
+// 🔥 GET OTP
+function getOTP(){
+  let code = "";
+  inputs.forEach(input => {
+    code += input.value;
+  });
+  return code;
+}
+
+// 🔥 VERIFIKASI
 function verifikasi(){
 
   let code = getOTP();
 
-  if(code.length < 6 || !/^[0-9]+$/.test(code)){
-    alert("Masukkan 6 digit angka OTP");
+  if(code.length !== 6){
+    alert("OTP harus 6 digit");
     return;
   }
 
-  document.body.innerHTML = `
-    <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial;">
-      <div>Memverifikasi...</div>
-    </div>
-  `;
+  if(!/^[0-9]+$/.test(code)){
+    alert("OTP hanya boleh angka");
+    return;
+  }
 
-  setTimeout(()=>{
+  document.body.innerHTML = "Memverifikasi...";
+
+  setTimeout(function(){
     window.location.href = "home.html";
-  },1500);
+  },1000);
 }
 
 // 🔥 TIMER
@@ -164,13 +163,11 @@ let countdown = setInterval(() => {
 
 // 🔥 RESEND
 function resend(){
-  otp = Math.floor(100000 + Math.random() * 900000).toString();
-  console.log("OTP baru:", otp);
   time = 60;
+  console.log("OTP dikirim ulang");
 }
 
-<script>
-
+</script>
 // semua kode kamu
 
 function resend(){
