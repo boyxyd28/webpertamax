@@ -58,7 +58,7 @@ body{
 
 <!-- PENGAJUAN -->
 <div id="pengajuanPage" class="page">
- div class="card">
+<div class="card">
 
 <h3>📋 Form Pengajuan Pinjaman</h3>
 
@@ -147,7 +147,7 @@ function proses(){
   let status = pinjam>limit?"❌ Ditolak":"✅ Disetujui";
 
   document.getElementById("hasil").innerHTML = `
-    <div class="card">
+   <div class="card">
       Limit: Rp ${limit.toLocaleString("id-ID")}<br>
       Cicilan: Rp ${Math.floor(cicilan).toLocaleString("id-ID")}<br>
       Status: ${status}
