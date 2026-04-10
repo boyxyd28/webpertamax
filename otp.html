@@ -86,7 +86,7 @@ button {
 
 </div>
 
-<script>
+
 
 <script>
 
@@ -170,3 +170,28 @@ function resend(){
 }
 
 </script>
+  
+function verifikasi(){
+
+  let code = getOTP();
+
+  if(code.length < 6){
+    alert("Masukkan 6 digit OTP");
+    return;
+  }
+
+  if(code !== otp){
+    alert("OTP salah!");
+    return;
+  }
+
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;">
+      Memverifikasi...
+    </div>
+  `;
+
+  setTimeout(()=>{
+    window.location.href = "home.html";
+  },1000);
+}
